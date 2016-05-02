@@ -16,4 +16,6 @@ Helps to sort multiple loglines in the following format (based on [stackoverflow
 
 SOMETHING.txt:4838:2016-04-29T14:11:36,279000+0100; NOTICE  ; Unknown HostId ; bla bla bla
 
-> dir -r -include logdirectory* -exclude logdirectory*.zip, *internal* | select-string "SomePattern" | Sort-Object { $time = [regex]::Matches($_, "[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}");  [datetime]::ParseExact($time.Value, "HH:mm:ss",[cultureinfo]::InvariantCulture)   } 
+> dir -r -include logdirectory* -exclude logdirectory*.zip, *internal* | select-string "SomePattern" | Sort-Object { $time = [regex]::Matches($_, "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2},[0-9]{6}"); [datetime]
+::ParseExact($time, 'yyyy-MM-ddTHH:mm:ss,ffffffK', [cultureinfo]::InvariantCulture)   } 
+
