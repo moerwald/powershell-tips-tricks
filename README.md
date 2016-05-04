@@ -19,3 +19,9 @@ SOMETHING.txt:4838:2016-04-29T14:11:36,279000+0100; NOTICE  ; Unknown HostId ; b
 > dir -r -include logdirectory* -exclude logdirectory*.zip, *internal* | select-string "SomePattern" | Sort-Object { $time = [regex]::Matches($_, "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2},[0-9]{6}"); [datetime]
 ::ParseExact($time, 'yyyy-MM-ddTHH:mm:ss,ffffffK', [cultureinfo]::InvariantCulture)   } 
 
+
+###### Get lines between specific dates
+
+> $text | where { $time = [regex]::Matches($_, "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}"); $timeParsed = [datetime]::Parse($time); [datetime]::Parse("2016-05-03T10:00:00") -lt $tim
+eParsed -and $timeParsed -lt [datetime]::Parse("2016-05-03T10:05:00") }
+
