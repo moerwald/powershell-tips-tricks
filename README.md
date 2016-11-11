@@ -38,3 +38,8 @@ From now on you can use the sess object to perform remote commands:
 At the end you can remove the session:
 
 >Remove-PSSession -Session $sess
+
+
+###### Create a new remote session towards server
+
+Debug the invoke-command cmdlet in a the remote session: https://social.technet.microsoft.com/Forums/en-US/461c5028-de6a-42ce-86bb-0c1be2809801/how-to-debug-invokecommand?forum=winserverpowershell
