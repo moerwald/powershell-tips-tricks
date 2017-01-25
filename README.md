@@ -43,3 +43,25 @@ At the end you can remove the session:
 ###### Create a new remote session towards server
 
 Debug the invoke-command cmdlet in a the remote session: https://social.technet.microsoft.com/Forums/en-US/461c5028-de6a-42ce-86bb-0c1be2809801/how-to-debug-invokecommand?forum=winserverpowershell
+
+
+###### Working with erors
+
+All errors are stored in $Error. To get a more clearly error output we can use:
+
+> $Error | Group-Object | Sort-Object -Property Count -Descending | Format-Table -Property Count,Name -AutoSize
+
+$Error is a collection, therefore we can use to index operator. We sending an error to Format-List we've to override the default error printing mechanism via -Force.
+
+> $Error[0] | format-list * -FORCE
+
+Another usefull pattern for exception printing included in $Error:
+
+> $Error[0].Exception | format-list * -force
+> $Error[0].Exception.InnerException | format-list * -force
+
+Error can also be removed via 
+
+> $Error.Remove($Error[0])
+
+
